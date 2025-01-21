@@ -36,7 +36,7 @@ const Navbar = () => {
                   isActivePath(item.href)
                     ? "text-blue-600 font-semibold"
                     : "text-gray-600 hover:text-blue-500"
-                } transition-colors duration-200 text-black font-semibold text-2xl uppercase`}
+                } transition-colors duration-200 text-black font-semibold text-xl`}
               >
                 {item.name}
               </Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
                 isActivePath(item.href)
                   ? "bg-blue-50 text-blue-600"
                   : "text-gray-600 hover:text-blue-500"
-              } block px-3 py-2 rounded-md uppercase font-medium text-2xl `}
+              } block px-3 py-2 rounded-md font-medium text-xl `}
               onClick={() => setIsOpen(false)}
             >
               {item.name}

@@ -1,4 +1,4 @@
-import { Search, Barcode, AlertCircle } from "lucide-react";
+import { Search, Barcode, AlertCircle, X } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -6,6 +6,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { Input } from "@/components/ui/input";
 
 export default function ProductFilters({
@@ -20,8 +27,15 @@ export default function ProductFilters({
   sortOrder = "asc",
   onSortOrderChange,
   categories = [],
-  barcodeError = null
+  barcodeError = null,
 }) {
+  const clearfilter = () => {
+    onSearchChange("");
+    onCategoryChange("all");
+    onGradeChange("all");
+    onSortByChange("name");
+    onSortOrderChange("asc");
+  };
   return (
     <div className="mb-8 max-w-4xl mx-auto bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-gray-100">
       <div className="flex flex-col gap-4">
@@ -30,22 +44,38 @@ export default function ProductFilters({
             <Search className="h-5 w-5" />
             <Barcode className="h-5 w-5" />
           </div>
-          <Input
-            type="text"
-            placeholder="Search by product name, brand, or scan barcode..."
-            value={searchQuery}
-            onChange={onSearchChange}
-            className="pl-16 w-full h-[42px] bg-gray-50/50 border-gray-200 focus:border-blue-500 rounded-xl"
-          />
+          <div className="flex">
+            <Input
+              type="text"
+              placeholder="Search by product name, brand, or scan barcode..."
+              value={searchQuery}
+              onChange={e=>onSearchChange(e.target.value??"")}
+              className="pl-16 w-full h-[42px] bg-gray-50/50 border-gray-200 focus:border-blue-500 rounded-xl"
+            />
+            <TooltipProvider>
+              <Tooltip>
+              <TooltipTrigger>
+                <button
+                  onClick={clearfilter}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-2 text-gray-400 "
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </TooltipTrigger>
+                <TooltipContent side={"top"} align={"center"}>
+                  <p>Remove all filters</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
-        
         {barcodeError && (
           <div className="text-red-500 text-sm flex items-center gap-2">
             <AlertCircle className="h-4 w-4" />
             {barcodeError}
           </div>
         )}
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Select value={categoryFilter} onValueChange={onCategoryChange}>
             <SelectTrigger className="w-full h-[42px] bg-gray-50/50 border-gray-200 rounded-xl">

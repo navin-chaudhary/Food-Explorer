@@ -119,7 +119,6 @@ export default function ProductsPage() {
   const fetchCategories = async () => {
     try {
       const response = await fetch(CATEGORIES_URL);
-      console.log("cetegorie response ", response.json());
       
       if (!response.ok) throw new Error("Failed to fetch categories");
       const data = await response.json();
@@ -189,11 +188,13 @@ export default function ProductsPage() {
           id: p.code,
         }));
 
+      if (validProducts.length < ITEMS_PER_PAGE) {
+        setHasMore(false);
+      } else {
+        setHasMore(true);
+      }
+
       setTotalCount(data.count || 0);
-      setHasMore(
-        validProducts.length === ITEMS_PER_PAGE &&
-          pageNumber * ITEMS_PER_PAGE < data.count
-      );
 
       setProducts((prevProducts) => {
         const newProducts = isNewSearch
@@ -214,8 +215,8 @@ export default function ProductsPage() {
     }
   };
 
-  const handleSearchChange = (e) => {
-    const value = e.target.value;
+  const handleSearchChange = (value) => {
+    
     setSearchQuery(value);
     setBarcodeError(null);
     if (/^\d{8,13}$/.test(value)) {
