@@ -22,4 +22,4 @@ Then, open [http://localhost:3000](http://localhost:3000) with your browser to s
 
 ## Contributing
 
-If you find a bug or have a suggestion, please [open an issue](https://github.com/navin-chaudhary/food-products-explorer/issues/new). Pull requests are welcome.
+If you find a bug or have a suggestion, please [open an issue](https://github.com/navin-chaudhary/Food-Explorer/issues/new). Pull requests are welcome.
