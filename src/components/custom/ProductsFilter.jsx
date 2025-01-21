@@ -47,7 +47,7 @@ export default function ProductFilters({
           <div className="flex">
             <Input
               type="text"
-              placeholder="Search by product name, brand, or scan barcode..."
+              placeholder="Search by product name, brand, or barcode"
               value={searchQuery}
               onChange={e=>onSearchChange(e.target.value??"")}
               className="pl-16 w-full h-[42px] bg-gray-50/50 border-gray-200 focus:border-blue-500 rounded-xl"
