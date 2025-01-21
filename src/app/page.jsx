@@ -133,12 +133,12 @@ export default function ProductsPage() {
   };
 
   const fetchProducts = async (pageNumber = 1, isNewSearch = false) => {
-   
       setError(null);
-    try {
-      if (isNewSearch) {
-        setInitialLoading(true);      
+
+      try {
+        if (isNewSearch) {
         setProducts([]);
+        setInitialLoading(true);      
         setFilteredProducts([]);
         setPage(1);
       } else {
@@ -188,11 +188,7 @@ export default function ProductsPage() {
           id: p.code,
         }));
 
-      if (validProducts.length < ITEMS_PER_PAGE) {
-        setHasMore(false);
-      } else {
-        setHasMore(true);
-      }
+     if (validProducts.length < ITEMS_PER_PAGE) setHasMore(true);
 
       setTotalCount(data.count || 0);
 
