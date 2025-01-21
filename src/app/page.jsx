@@ -134,11 +134,11 @@ export default function ProductsPage() {
 
   const fetchProducts = async (pageNumber = 1, isNewSearch = false) => {
       setError(null);
+      setInitialLoading(true);      
 
       try {
         if (isNewSearch) {
         setProducts([]);
-        setInitialLoading(true);      
         setFilteredProducts([]);
         setPage(1);
       } else {

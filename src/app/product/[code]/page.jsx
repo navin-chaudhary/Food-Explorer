@@ -101,10 +101,7 @@ const ProductDetails = () => {
 
   if (!product) return null;
 
-  const formatNutrient = (value, unit = "g") => {
-    if (value === undefined || value === null) return "N/A";
-    return `${parseFloat(value).toFixed(1)}${unit}`;
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -130,14 +127,7 @@ const ProductDetails = () => {
               </div>
               <div className="flex flex-wrap gap-3">
                 <NutritionGrade grade={product.nutrition_grades} />
-                {product.ecoscore_grade && (
-                  <Badge
-                    variant="outline"
-                    className="px-4 py-1.5 text-sm bg-green-50 text-green-700 border-green-200 font-medium shadow-sm"
-                  >
-                    Eco-score: {product.ecoscore_grade.toUpperCase()}
-                  </Badge>
-                )}
+                
               </div>
             </div>
           </CardHeader>
